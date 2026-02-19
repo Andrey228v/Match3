@@ -9,21 +9,23 @@ namespace Assets.Scripts.Game.Board
 {
     public class GameBoard : MonoBehaviour
     {
-        
         [SerializeField] private TileConfig _tileConfig;
+        [SerializeField] private bool _isDebugging;
 
         private readonly List<Tile> _tilesToRefill = new List<Tile>();
 
         private MapGrid _grid;
         private TilePool _tilePool;
         private SetupCamera _setupCamera;
+        private GameDebug _gameDebug;
 
         [Inject]
-        public void Constructor(MapGrid grid, SetupCamera setupCamera, TilePool tilePool)
+        public void Constructor(MapGrid grid, SetupCamera setupCamera, TilePool tilePool, GameDebug gameDebug)
         {
             _grid = grid;
             _setupCamera = setupCamera;
             _tilePool = tilePool;
+            _gameDebug = gameDebug;
         }
 
         private void Start()
@@ -31,6 +33,10 @@ namespace Assets.Scripts.Game.Board
             _grid.SetupGrid(10, 10);
             CreateBoard();
             _setupCamera.SetCamera(_grid.Width, _grid.Height, false);
+
+            if(_isDebugging)
+                _gameDebug.ShowDebug(transform);
+
         }
 
         public void CreateBoard()

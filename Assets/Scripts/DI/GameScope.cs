@@ -21,6 +21,7 @@ namespace Assets.Scripts.DI
             builder.Register<MapGrid>(Lifetime.Singleton);
             builder.Register<SetupCamera>(Lifetime.Singleton);
             builder.Register<TilePool>(Lifetime.Singleton);
+            builder.Register<GameDebug>(Lifetime.Singleton);
         }
 
     }
