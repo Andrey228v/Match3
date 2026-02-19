@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2142a43d25ef84245bc37ed9a6b468f6, type: 3}
-  m_Name: Coin
+  m_Name: BlankTile
   m_EditorClassIdentifier: 
-  _sprite: {fileID: 21300000, guid: 15f90ad11d43ee24ea522f53945f049f, type: 3}
-  _tileKind: 0
-  _isInterectable: 1
+  _sprite: {fileID: 0}
+  _tileKind: 1
+  _isInterectable: 0

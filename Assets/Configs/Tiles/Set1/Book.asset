@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sprite: {fileID: 21300000, guid: 9e339b24b7a335e49ae9bf2bc3a63114, type: 3}
   _tileKind: 0
-  _isInterectable: 0
+  _isInterectable: 1

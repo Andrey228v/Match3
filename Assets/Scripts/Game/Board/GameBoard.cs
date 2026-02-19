@@ -15,22 +15,25 @@ namespace Assets.Scripts.Game.Board
         private readonly List<Tile> _tilesToRefill = new List<Tile>();
 
         private MapGrid _grid;
+        private BlankTileSetup _blankTileSetup;
         private TilePool _tilePool;
         private SetupCamera _setupCamera;
         private GameDebug _gameDebug;
 
         [Inject]
-        public void Constructor(MapGrid grid, SetupCamera setupCamera, TilePool tilePool, GameDebug gameDebug)
+        public void Constructor(MapGrid grid, SetupCamera setupCamera, TilePool tilePool, GameDebug gameDebug, BlankTileSetup blankTileSetup)
         {
             _grid = grid;
             _setupCamera = setupCamera;
             _tilePool = tilePool;
             _gameDebug = gameDebug;
+            _blankTileSetup = blankTileSetup;
         }
 
         private void Start()
         {
             _grid.SetupGrid(10, 10);
+            _blankTileSetup.SetupBlanks(_grid.Width, _grid.Height);
             CreateBoard();
             _setupCamera.SetCamera(_grid.Width, _grid.Height, false);
 
@@ -50,12 +53,19 @@ namespace Assets.Scripts.Game.Board
             {
                 for (int y = 0; y < _grid.Height; y++)
                 {
-                    if (_grid.GetValue(x, y)) continue;
-
-                    var tile = _tilePool.GetTile(_grid.GridToWorld(x, y), transform);
-                    _grid.SetValue(x, y, tile);
-                    tile.gameObject.SetActive(true);
-                    _tilesToRefill.Add(tile);
+                    if (_blankTileSetup.Blanks[x, y]) 
+                    {
+                        if (_grid.GetValue(x, y)) continue;
+                        var blankTile = _tilePool.CreateBlankTile(_grid.GridToWorld(x, y), transform);
+                        _grid.SetValue(x, y, blankTile);
+                    }
+                    else
+                    {
+                        var tile = _tilePool.GetTile(_grid.GridToWorld(x, y), transform);
+                        _grid.SetValue(x, y, tile);
+                        tile.gameObject.SetActive(true);
+                        _tilesToRefill.Add(tile);
+                    }   
                 }
             }
         }
