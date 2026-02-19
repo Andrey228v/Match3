@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Game.GridSystem
 {
-    public class Grid
+    public class MapGrid
     {
         public Tile[,] GameGrid { get; private set; }
         
