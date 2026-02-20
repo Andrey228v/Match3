@@ -63,7 +63,7 @@ namespace Assets.Scripts.StateMachines.States
             {
                 _grid.SetTargetPosition(clickPosition);
                 _animation.AnimateTile(_grid.GetValue(_grid.CurrentPosition.x, _grid.CurrentPosition.y), 1f);
-               // _stateSwitcher.ChangeState<SwapTilesState>();
+                _stateSwitcher.ChangeState<SwapTilesState>();
             }
         }
 

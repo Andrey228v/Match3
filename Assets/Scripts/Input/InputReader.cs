@@ -36,7 +36,7 @@ namespace Assets.Scripts.Input
             }
         }
 
-        public Vector3 Position() => _inputSystem.Player.Select.ReadValue<Vector2>();
+        public Vector2 Position() => _inputSystem.Player.Select.ReadValue<Vector2>();
 
         private void ButtonClickExist(InputAction.CallbackContext context)
         {

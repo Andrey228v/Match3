@@ -26,7 +26,7 @@ namespace Assets.Scripts.StateMachines
             {
                 new PrepareState(this, _gameBoard),
                 new PlayerTurnState(_grid, this, _animation),
-                new SwapTilesState(),
+                new SwapTilesState(_grid, this, _animation),
             };
 
             _currentState = _states[0];
