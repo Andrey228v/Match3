@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Game.GridSystem;
 using Assets.Scripts.Game.Tiles;
+using Assets.Scripts.Input;
 using Assets.Scripts.Levels;
 using Assets.Scripts.Utils;
 using System.Collections.Generic;
@@ -21,6 +22,7 @@ namespace Assets.Scripts.Game.Board
         private TilePool _tilePool;
         private SetupCamera _setupCamera;
         private GameDebug _gameDebug;
+        private InputReader _inputReader;
 
         [Inject]
         public void Constructor(MapGrid grid, SetupCamera setupCamera, TilePool tilePool, GameDebug gameDebug, BlankTileSetup blankTileSetup)
@@ -34,6 +36,8 @@ namespace Assets.Scripts.Game.Board
 
         private void Start()
         {
+            _inputReader = new InputReader();
+            _inputReader.OnClick += ClickTest;
             _grid.SetupGrid(_levelConfig.Width, _levelConfig.Height);
             _blankTileSetup.SetupBlanks(_levelConfig);
             CreateBoard();
@@ -42,6 +46,11 @@ namespace Assets.Scripts.Game.Board
             if(_isDebugging)
                 _gameDebug.ShowDebug(transform);
 
+        }
+
+        private void OnDisable()
+        {
+            _inputReader.OnClick -= ClickTest;
         }
 
         public void CreateBoard()
@@ -70,6 +79,11 @@ namespace Assets.Scripts.Game.Board
                     }   
                 }
             }
+        }
+
+        private void ClickTest()
+        {
+            Debug.Log("Test");
         }
     }
 }
