@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Game.GridSystem;
 using Assets.Scripts.Game.Tiles;
+using Assets.Scripts.Levels;
 using Assets.Scripts.Utils;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ namespace Assets.Scripts.Game.Board
 {
     public class GameBoard : MonoBehaviour
     {
+        [SerializeField] private LevelConfig _levelConfig;
         [SerializeField] private TileConfig _tileConfig;
         [SerializeField] private bool _isDebugging;
 
@@ -32,8 +34,8 @@ namespace Assets.Scripts.Game.Board
 
         private void Start()
         {
-            _grid.SetupGrid(10, 10);
-            _blankTileSetup.SetupBlanks(_grid.Width, _grid.Height);
+            _grid.SetupGrid(_levelConfig.Width, _levelConfig.Height);
+            _blankTileSetup.SetupBlanks(_levelConfig);
             CreateBoard();
             _setupCamera.SetCamera(_grid.Width, _grid.Height, false);
 

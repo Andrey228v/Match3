@@ -13,17 +13,16 @@ namespace Assets.Scripts.DI
     {
         [SerializeField] private GameBoard _gameBoard;
         [SerializeField] private GameResoursesLoader _loader;
-        [SerializeField] private BlankTileSetup _blankTileSetup;
 
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterInstance(_gameBoard);
             builder.RegisterInstance(_loader);
-            builder.RegisterInstance(_blankTileSetup);
             builder.Register<MapGrid>(Lifetime.Singleton);
             builder.Register<SetupCamera>(Lifetime.Singleton);
             builder.Register<TilePool>(Lifetime.Singleton);
             builder.Register<GameDebug>(Lifetime.Singleton);
+            builder.Register<BlankTileSetup>(Lifetime.Singleton);
         }
 
     }
