@@ -23,7 +23,6 @@ namespace Assets.Scripts.Game.Board
         private TilePool _tilePool;
         private SetupCamera _setupCamera;
         private GameDebug _gameDebug;
-        private InputReader _inputReader;
         private IAnimation _animation;
 
         [Inject]
@@ -39,8 +38,6 @@ namespace Assets.Scripts.Game.Board
 
         private void Awake()
         {
-            _inputReader = new InputReader();
-            _inputReader.EnableInputs(true);
             _grid.SetupGrid(_levelConfig.Width, _levelConfig.Height);
             _blankTileSetup.SetupBlanks(_levelConfig);
             _setupCamera.SetCamera(_grid.Width, _grid.Height, false);

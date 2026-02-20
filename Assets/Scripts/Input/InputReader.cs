@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Numerics;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Assets.Scripts.Input
 {
-    internal class InputReader : IDisposable
+    public class InputReader : IDisposable
     {
         public event Action OnClick;
 
@@ -36,7 +36,7 @@ namespace Assets.Scripts.Input
             }
         }
 
-        public Vector2 Position() => _inputSystem.Player.Select.ReadValue<Vector2>();
+        public Vector3 Position() => _inputSystem.Player.Select.ReadValue<Vector2>();
 
         private void ButtonClickExist(InputAction.CallbackContext context)
         {

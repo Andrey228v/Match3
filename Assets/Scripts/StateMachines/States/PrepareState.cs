@@ -18,6 +18,7 @@ namespace Assets.Scripts.StateMachines.States
         public void Enter()
         {
             _gameBoard.CreateBoard();
+            _stateSwitcher.ChangeState<PlayerTurnState>();
         }
 
         public void Exit()

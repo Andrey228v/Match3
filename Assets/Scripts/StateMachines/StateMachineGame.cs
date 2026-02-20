@@ -1,10 +1,10 @@
-﻿using Assets.Scripts.Game.Board;
+﻿using Assets.Scripts.Animations;
+using Assets.Scripts.Game.Board;
+using Assets.Scripts.Game.GridSystem;
 using Assets.Scripts.StateMachines.States;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Assets.Scripts.StateMachines
 {
@@ -13,13 +13,20 @@ namespace Assets.Scripts.StateMachines
         private List<IState> _states;
         private IState _currentState;
         private GameBoard _gameBoard;
+        private MapGrid _grid;
+        private IAnimation _animation;
 
-        public StateMachineGame(GameBoard gameBoard)
+        public StateMachineGame(GameBoard gameBoard, MapGrid grid, IAnimation animation)
         {
             _gameBoard = gameBoard;
+            _grid = grid;
+            _animation = animation;
+
             _states = new List<IState>()
             {
-                new PrepareState(this, _gameBoard)
+                new PrepareState(this, _gameBoard),
+                new PlayerTurnState(_grid, this, _animation),
+                new SwapTilesState(),
             };
 
             _currentState = _states[0];
