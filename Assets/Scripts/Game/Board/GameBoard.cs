@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Game.GridSystem;
+﻿using Assets.Scripts.Animations;
+using Assets.Scripts.Game.GridSystem;
 using Assets.Scripts.Game.Tiles;
 using Assets.Scripts.Input;
 using Assets.Scripts.Levels;
@@ -23,15 +24,17 @@ namespace Assets.Scripts.Game.Board
         private SetupCamera _setupCamera;
         private GameDebug _gameDebug;
         private InputReader _inputReader;
+        private IAnimation _animation;
 
         [Inject]
-        public void Constructor(MapGrid grid, SetupCamera setupCamera, TilePool tilePool, GameDebug gameDebug, BlankTileSetup blankTileSetup)
+        public void Constructor(MapGrid grid, SetupCamera setupCamera, TilePool tilePool, GameDebug gameDebug, BlankTileSetup blankTileSetup, IAnimation animation)
         {
             _grid = grid;
             _setupCamera = setupCamera;
             _tilePool = tilePool;
             _gameDebug = gameDebug;
             _blankTileSetup = blankTileSetup;
+            _animation = animation;
         }
 
         private void Awake()
@@ -50,6 +53,7 @@ namespace Assets.Scripts.Game.Board
         public void CreateBoard()
         {
             FillBoard();
+            RevealTiles();
         }
 
         private void FillBoard()
@@ -72,6 +76,15 @@ namespace Assets.Scripts.Game.Board
                         _tilesToRefill.Add(tile);
                     }   
                 }
+            }
+        }
+
+        private void RevealTiles()
+        {
+            foreach (var tile in _tilesToRefill)
+            {
+                var gameObjectTile = tile.gameObject;
+                _animation.Reveal(gameObjectTile, 1f);
             }
         }
 

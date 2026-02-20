@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Game.Board;
+﻿using Assets.Scripts.Animations;
+using Assets.Scripts.Game.Board;
 using Assets.Scripts.Game.GridSystem;
 using Assets.Scripts.Game.Tiles;
 using Assets.Scripts.ResoursesLoading;
@@ -23,6 +24,7 @@ namespace Assets.Scripts.DI
             builder.Register<TilePool>(Lifetime.Singleton);
             builder.Register<GameDebug>(Lifetime.Singleton);
             builder.Register<BlankTileSetup>(Lifetime.Singleton);
+            builder.Register<IAnimation, AnimationManager>(Lifetime.Singleton);
         }
 
     }
