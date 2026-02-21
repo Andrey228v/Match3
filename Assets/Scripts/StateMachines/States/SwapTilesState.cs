@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Animations;
 using Assets.Scripts.Game.GridSystem;
 using Assets.Scripts.Game.MatchTiles;
+using Assets.Scripts.Game.Score;
 using Assets.Scripts.Game.Tiles;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -17,13 +18,16 @@ namespace Assets.Scripts.StateMachines.States
         private IStateSwitcher _switcher;
         private IAnimation _animation;
         private MatchFinder _matchFinder;
+        private GameProgress _gameProgress;
 
-        public SwapTilesState(MapGrid grid,  IStateSwitcher switcher, IAnimation animation, MatchFinder matchFinder)
+        public SwapTilesState(MapGrid grid,  IStateSwitcher switcher, 
+            IAnimation animation, MatchFinder matchFinder, GameProgress gameProgress)
         {
             _grid = grid;
             _switcher = switcher;
             _animation = animation;
             _matchFinder = matchFinder;
+            _gameProgress = gameProgress;
         }
 
 
@@ -45,6 +49,7 @@ namespace Assets.Scripts.StateMachines.States
             }
             else
             {
+                _gameProgress.SpendMove();
                 _switcher.ChangeState<RemoveTileState>();
             }
 

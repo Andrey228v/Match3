@@ -27,6 +27,8 @@ namespace Assets.Scripts.Game.Board
         private IAnimation _animation;
         private MatchFinder _matchFinder;
 
+        public LevelConfig LevelConfig => _levelConfig;
+
         [Inject]
         public void Constructor(MapGrid grid, SetupCamera setupCamera, 
             TilePool tilePool, GameDebug gameDebug, 

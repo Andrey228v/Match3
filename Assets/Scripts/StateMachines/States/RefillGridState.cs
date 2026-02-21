@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Animations;
 using Assets.Scripts.Game.GridSystem;
 using Assets.Scripts.Game.MatchTiles;
+using Assets.Scripts.Game.Score;
 using Assets.Scripts.Game.Tiles;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -25,9 +26,10 @@ namespace Assets.Scripts.StateMachines.States
         private TilePool _tilePool;
         private readonly Transform _parent;
         private List<Vector2Int> _tilesToRefillPosition = new List<Vector2Int>();
+        private GameProgress _gameProgress;
 
         public RefillGridState(MapGrid grid, IStateSwitcher stateSwitcher, 
-            IAnimation animation, MatchFinder matchFinder, TilePool tilePool, Transform parent)
+            IAnimation animation, MatchFinder matchFinder, TilePool tilePool, Transform parent, GameProgress gameProgress)
         {
             _grid = grid;
             _stateSwitcher = stateSwitcher;
@@ -35,6 +37,7 @@ namespace Assets.Scripts.StateMachines.States
             _matchFinder = matchFinder;
             _tilePool = tilePool;
             _parent = parent;
+            _gameProgress = gameProgress;
         }
 
         public void Dispose()
@@ -115,7 +118,12 @@ namespace Assets.Scripts.StateMachines.States
 
         private void CheckEndGame()
         {
-            _stateSwitcher.ChangeState<PlayerTurnState>();
+            if (_gameProgress.CheckGoalScore())
+                _stateSwitcher.ChangeState<WinState>();
+            else if(_gameProgress.Moves <= 0) 
+                _stateSwitcher.ChangeState<LooseState>();
+            else
+                _stateSwitcher.ChangeState<PlayerTurnState>();
         }
     }
 }

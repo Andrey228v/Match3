@@ -2,6 +2,7 @@
 using Assets.Scripts.Game.Board;
 using Assets.Scripts.Game.GridSystem;
 using Assets.Scripts.Game.MatchTiles;
+using Assets.Scripts.Game.Score;
 using Assets.Scripts.Game.Tiles;
 using Assets.Scripts.ResoursesLoading;
 using Assets.Scripts.Utils;
@@ -27,6 +28,8 @@ namespace Assets.Scripts.DI
             builder.Register<BlankTileSetup>(Lifetime.Singleton);
             builder.Register<IAnimation, AnimationManager>(Lifetime.Singleton);
             builder.Register<MatchFinder>(Lifetime.Singleton);
+            builder.Register<GameProgress>(Lifetime.Singleton);
+            builder.Register<ScoreCalculator>(Lifetime.Singleton);
         }
 
     }
