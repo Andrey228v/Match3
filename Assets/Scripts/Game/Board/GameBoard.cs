@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.Animations;
 using Assets.Scripts.Game.GridSystem;
+using Assets.Scripts.Game.MatchTiles;
 using Assets.Scripts.Game.Tiles;
 using Assets.Scripts.Input;
 using Assets.Scripts.Levels;
@@ -24,9 +25,12 @@ namespace Assets.Scripts.Game.Board
         private SetupCamera _setupCamera;
         private GameDebug _gameDebug;
         private IAnimation _animation;
+        private MatchFinder _matchFinder;
 
         [Inject]
-        public void Constructor(MapGrid grid, SetupCamera setupCamera, TilePool tilePool, GameDebug gameDebug, BlankTileSetup blankTileSetup, IAnimation animation)
+        public void Constructor(MapGrid grid, SetupCamera setupCamera, 
+            TilePool tilePool, GameDebug gameDebug, 
+            BlankTileSetup blankTileSetup, IAnimation animation, MatchFinder matchFinder)
         {
             _grid = grid;
             _setupCamera = setupCamera;
@@ -34,6 +38,7 @@ namespace Assets.Scripts.Game.Board
             _gameDebug = gameDebug;
             _blankTileSetup = blankTileSetup;
             _animation = animation;
+            _matchFinder = matchFinder;
         }
 
         private void Awake()
@@ -50,6 +55,12 @@ namespace Assets.Scripts.Game.Board
         public void CreateBoard()
         {
             FillBoard();
+            while (_matchFinder.CheckBoardForMatches(_grid))
+            {
+                ClearBoard();
+                FillBoard();
+            }
+            _matchFinder.ClearTilesToRemove();
             RevealTiles();
         }
 
@@ -83,6 +94,19 @@ namespace Assets.Scripts.Game.Board
                 var gameObjectTile = tile.gameObject;
                 _animation.Reveal(gameObjectTile, 1f);
             }
+        }
+
+        private void ClearBoard()
+        {
+            if(_tilesToRefill == null) return;
+
+            foreach(var tile in _tilesToRefill)
+            {
+                _grid.SetValue(tile.transform.position, null);
+                tile.gameObject.SetActive(false);
+            }
+
+            _tilesToRefill.Clear();
         }
 
     }

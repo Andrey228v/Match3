@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Animations;
 using Assets.Scripts.Game.Board;
 using Assets.Scripts.Game.GridSystem;
+using Assets.Scripts.Game.MatchTiles;
 using Assets.Scripts.Game.Tiles;
 using Assets.Scripts.ResoursesLoading;
 using Assets.Scripts.Utils;
@@ -25,6 +26,7 @@ namespace Assets.Scripts.DI
             builder.Register<GameDebug>(Lifetime.Singleton);
             builder.Register<BlankTileSetup>(Lifetime.Singleton);
             builder.Register<IAnimation, AnimationManager>(Lifetime.Singleton);
+            builder.Register<MatchFinder>(Lifetime.Singleton);
         }
 
     }
