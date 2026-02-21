@@ -26,7 +26,6 @@ namespace Assets.Scripts.DI
             builder.Register<TilePool>(Lifetime.Singleton);
             builder.Register<GameDebug>(Lifetime.Singleton);
             builder.Register<BlankTileSetup>(Lifetime.Singleton);
-            builder.Register<IAnimation, AnimationManager>(Lifetime.Singleton);
             builder.Register<MatchFinder>(Lifetime.Singleton);
             builder.Register<GameProgress>(Lifetime.Singleton);
             builder.Register<ScoreCalculator>(Lifetime.Singleton);
