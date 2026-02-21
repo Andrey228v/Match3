@@ -1,6 +1,7 @@
 ﻿using Assets.Scripts.Animations;
 using Assets.Scripts.Game.Board;
 using Assets.Scripts.Game.GridSystem;
+using Assets.Scripts.Game.MatchTiles;
 using Assets.Scripts.StateMachines.States;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,18 +16,22 @@ namespace Assets.Scripts.StateMachines
         private GameBoard _gameBoard;
         private MapGrid _grid;
         private IAnimation _animation;
+        private MatchFinder _matchFinder;
 
-        public StateMachineGame(GameBoard gameBoard, MapGrid grid, IAnimation animation)
+        public StateMachineGame(GameBoard gameBoard, MapGrid grid, IAnimation animation, MatchFinder matchFinder)
         {
             _gameBoard = gameBoard;
             _grid = grid;
             _animation = animation;
+            _matchFinder = matchFinder;
 
             _states = new List<IState>()
             {
                 new PrepareState(this, _gameBoard),
                 new PlayerTurnState(_grid, this, _animation),
-                new SwapTilesState(_grid, this, _animation),
+                new SwapTilesState(_grid, this, _animation, _matchFinder),
+                new RemoveTileState(_grid, this, _animation, _matchFinder),
+                new RefillGridState(),
             };
 
             _currentState = _states[0];
