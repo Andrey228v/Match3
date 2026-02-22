@@ -462,7 +462,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 199.36, y: 432.7}
+  m_AnchoredPosition: {x: 199.35999, y: 432.7}
   m_SizeDelta: {x: 476, y: 939}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &555805366
@@ -639,6 +639,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582637173}
   m_CullTransparentMesh: 1
+--- !u!1 &623328443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 623328445}
+  - component: {fileID: 623328444}
+  m_Layer: 0
+  m_Name: '[Container]'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &623328444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623328443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d3f9e3bf0bd4b4c9dfc3d4686d311c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: Assets.Scripts.Boot.RootScope
+  autoRun: 1
+  autoInjectGameObjects: []
+--- !u!4 &623328445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 623328443}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 90}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &669985344
 GameObject:
   m_ObjectHideFlags: 0
@@ -1061,6 +1109,7 @@ GameObject:
   - component: {fileID: 1271175602}
   - component: {fileID: 1271175604}
   - component: {fileID: 1271175605}
+  - component: {fileID: 1271175606}
   m_Layer: 5
   m_Name: BackGroundImage
   m_TagString: Untagged
@@ -1122,6 +1171,21 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
+--- !u!114 &1271175606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271175601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0ec98da6e9e6448b2f0dd06e3ae2d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scrollSpeed: 0.007
+  _xDirection: 1
+  _yDirection: 0
 --- !u!1 &1315924625
 GameObject:
   m_ObjectHideFlags: 0
@@ -2209,3 +2273,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 1707600406}
   - {fileID: 1447046325}
+  - {fileID: 623328445}
