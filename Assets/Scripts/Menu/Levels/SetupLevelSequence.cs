@@ -4,7 +4,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Assets.Scripts.Menu.Levels
 {
-    public class SetupLevelSequenceConfig
+    public class SetupLevelSequence
     {
         public LevelSequenceConfig CurrentLevelSequence { get; private set; }
 
